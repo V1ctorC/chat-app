@@ -14,6 +14,15 @@ document.querySelector('#messageForm').addEventListener('submit', (e) => {
     inputMessage.value = ""
 })
 
-socket.on('sendMessage', (message) => {
-    console.log(message)
+document.querySelector('#share-location').addEventListener('click', () => {
+    if (!navigator.geolocation) {
+        return alert('Geolocation is not supported')
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        socket.emit('sendLocation', {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+    })
 })
