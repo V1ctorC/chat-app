@@ -19,9 +19,14 @@ io.on('connection', (socket) => {
     const message = "Welcome !"
 
     socket.emit('message', message)
+    socket.broadcast.emit('message', 'A new user has joined')
 
     socket.on('sendMessage', (message) => {
         io.emit('sendMessage', message)
+    })
+
+    socket.on('disconnect', () => {
+        io.emit('message', 'A user has left!')
     })
 })
 
