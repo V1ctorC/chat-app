@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>Chat App</title>
+        <link rel="icon" href="/img/favicon.png">
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
     </head>
     <body>
-        Chat app
+        <div class="chat">
+            <div class="chat__sidebar">
 
-        <div id="messages"></div>
-        
-        <form name="messageForm" id="messageForm">
-            <input type="text" name="messageText" placeholder="Message">
-            <button>Submit</button>
-        </form>
-        <button id="share-location">Share location</button>
+            </div>
+            <div class="chat__main">
+                <div id="messages" class="chat__messages"></div>
+
+                <div class="compose">
+                    <form name="messageForm" id="messageForm">
+                        <input type="text" name="messageText" placeholder="Message">
+                        <button>Submit</button>
+                    </form>
+                    <button id="share-location">Share location</button>
+                </div>
+            </div>
+        </div>
 
         <script id="messageTemplate" type="text/html">
-            <div>
-                <p>{{createdAt}} - {{message}}</p>
+            <div class="message">
+                <p>
+                    <span class="message__name">Some user name</span>
+                    <span class="message__meta">{{createdAt}}</span>
+                </p>
+                <p>{{message}}</p>
             </div>
         </script>
 
         <script id="locationTemplate" type="text/html">
-            <div>
-                <p>{{createdAt}} - <a href="{{url}}" target="_blank">My current location</a></p>
+            <div class="message">
+                <p>
+                    <span class="message__name">Some user name</span>
+                    <span class="message__meta">{{createdAt}}</span>
+                </p>
+                <p><a href="{{url}}" target="_blank">My current location</a></p>
             </div>
         </script>
 
