@@ -5,9 +5,15 @@ const $messageForm = document.querySelector('#messageForm')
 const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButton = $messageForm.querySelector('button')
 const $geolocationButton = document.querySelector('#share-location')
+const $messages = document.querySelector('#messages')
+
+// Templates
+const $messagesTemplate = document.querySelector('#messageTemplate').innerHTML
 
 socket.on('message', (message) => {
     console.log(message)
+    const html = Mustache.render($messagesTemplate, {message})
+    $messages.insertAdjacentHTML('beforeend', html)
 })
 
 $messageForm.addEventListener('submit', (e) => {
