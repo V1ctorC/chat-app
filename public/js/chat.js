@@ -11,6 +11,9 @@ const $messages = document.querySelector('#messages')
 const $messagesTemplate = document.querySelector('#messageTemplate').innerHTML
 const $locationTemplate = document.querySelector('#locationTemplate').innerHTML
 
+// Options 
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+
 socket.on('locationMessage', (messageLocation) => {
     const html = Mustache.render($locationTemplate, {
         createdAt: moment(messageLocation.createdAt).format('HH:mm'),
@@ -66,3 +69,5 @@ $geolocationButton.addEventListener('click', () => {
         })
     })
 })
+
+socket.emit('join', { username, room })
