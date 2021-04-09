@@ -4,7 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./utils/users')
+const { addUser, removeUser, getUser, getUsersInRoom, getListOfRooms } = require('./utils/users')
 
 const app = express()
 const server = http.createServer(app)
@@ -19,7 +19,13 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', (socket) => {
     console.log('New websocket connection')
 
-    socket.on('join', ({username, room}, callback) => {
+    socket.emit('listRooms', getListOfRooms())
+
+    socket.on('join', ({username, room, choiceRoom}, callback) => {
+
+        if (choiceRoom) {
+            room = choiceRoom
+        }
 
         const {error, user } = addUser({ id:socket.id, username, room})
 

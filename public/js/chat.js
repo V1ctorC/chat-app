@@ -13,7 +13,7 @@ const $locationTemplate = document.querySelector('#locationTemplate').innerHTML
 const $sidebarTemplate = document.querySelector('#sidebarTemplate').innerHTML
 
 // Options 
-const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+const { username, room, choiceRoom } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
 const autoScroll = () => {
 
@@ -100,7 +100,7 @@ $geolocationButton.addEventListener('click', () => {
     })
 })
 
-socket.emit('join', { username, room }, (error) => {
+socket.emit('join', { username, room, choiceRoom }, (error) => {
     if (error) {
         alert(error)
         location.href = '/'
